@@ -14,20 +14,47 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/ic_dart.png
+  AssetGenImage get icDart => const AssetGenImage('assets/icons/ic_dart.png');
+
+  /// File path: assets/icons/ic_firebase.png
+  AssetGenImage get icFirebase =>
+      const AssetGenImage('assets/icons/ic_firebase.png');
+
+  /// File path: assets/icons/ic_flutter.png
+  AssetGenImage get icFlutter =>
+      const AssetGenImage('assets/icons/ic_flutter.png');
+
   /// File path: assets/icons/ic_github.png
   AssetGenImage get icGithub =>
       const AssetGenImage('assets/icons/ic_github.png');
 
+  /// File path: assets/icons/ic_java.png
+  AssetGenImage get icJava => const AssetGenImage('assets/icons/ic_java.png');
+
   /// File path: assets/icons/ic_linkedin.png
   AssetGenImage get icLinkedin =>
       const AssetGenImage('assets/icons/ic_linkedin.png');
+
+  /// File path: assets/icons/ic_python.png
+  AssetGenImage get icPython =>
+      const AssetGenImage('assets/icons/ic_python.png');
 
   /// File path: assets/icons/ic_telegram.png
   AssetGenImage get icTelegram =>
       const AssetGenImage('assets/icons/ic_telegram.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [icGithub, icLinkedin, icTelegram];
+  List<AssetGenImage> get values => [
+    icDart,
+    icFirebase,
+    icFlutter,
+    icGithub,
+    icJava,
+    icLinkedin,
+    icPython,
+    icTelegram,
+  ];
 }
 
 class $AssetsImagesGen {

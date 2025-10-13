@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/extension/app_color.dart';
 import 'package:portfolio/extension/size_extension.dart';
@@ -45,71 +44,183 @@ class _HomePageState extends State<HomePage> {
                 _descriptionW(), 24.height,
                 // button
                 _letsTalkBtn(),
+                48.height,
+
+                //social
+                _findMe(center: true),
+                36.height,
+                _bestSkill(center: true),
+                // _socialAndSkill(),
               ],
+            ],
+          ),
+        ),
 
-              48.height,
-
-              //social
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      alignment: AlignmentGeometry.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('FIND WITH ME', style: GoogleFonts.rubik()),
-                          12.height,
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: MySocial.values.map((e) {
-                              if (e.index != 0) {
-                                return _socialBtn(e).paddingOnly(left: 16);
-                              }
-                              return _socialBtn(e);
-                            }).toList(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.5,
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      alignment: AlignmentGeometry.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('BEST SKILL ON', style: GoogleFonts.rubik()),
-                          12.height,
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: MySocial.values.map((e) {
-                              if (e.index != 0) {
-                                return _socialBtn(e).paddingOnly(left: 16);
-                              }
-                              return _socialBtn(e);
-                            }).toList(),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+        //about me
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal:
+                MediaQuery.of(context).size.width *
+                (MediaQuery.of(context).size.width > 600 ? .04 : .08),
+            vertical: MediaQuery.of(context).size.width * .04,
+          ),
+          margin: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * .08,
+            vertical: MediaQuery.of(context).size.width * .04,
+          ),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade900,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            children: [
+              Text(
+                'ABOUT ME',
+                style: GoogleFonts.rubik(
+                  fontSize: MediaQuery.of(context).size.width > 600 ? 40 : 25,
+                  color: AppColor.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              (MediaQuery.of(context).size.width * 0.01).height,
+              Text(
+                'I am a Software Development student with hands-on experience as a Mobile Developer. I contributed to real world mobile app projects, enhancing both my technical skills and understanding of collaborative development. I enjoy problem solving, learning new technologies, and creating user-friendly mobile applications. I am now looking for new opportunities to grow further, contribute to innovative projects, and bring value to a dynamic development team.',
+                style: GoogleFonts.robotoCondensed(
+                  fontSize: MediaQuery.of(context).size.width > 600 ? 18 : 14,
+                  color: AppColor.white,
+                  wordSpacing: 1.5,
+                  height: 2,
+                ),
               ),
             ],
           ),
         ),
 
+        //skill
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * .08,
+            vertical: MediaQuery.of(context).size.width * .04,
+          ),
+          color: Colors.grey.shade900,
+          child: Column(
+            children: [
+              Text(
+                'SKILLS',
+                style: GoogleFonts.rubik(
+                  fontSize: MediaQuery.of(context).size.width > 600 ? 40 : 25,
+                  color: AppColor.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              36.height,
+              _skillW('Flutter', 0.8),
+              24.height,
+              _skillW('Dart', 0.8),
+            ],
+          ),
+        ),
+
         //
-        1000.height,
+        Container(color: Colors.grey.shade900, child: 1000.height),
       ],
+    );
+  }
+
+  Widget _skillW(String text, double percent) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              text,
+              style: GoogleFonts.rubik(
+                fontSize: 17,
+                color: AppColor.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            Text(
+              '${(percent * 100).toStringAsFixed(0)}%',
+              style: GoogleFonts.rubik(
+                fontSize: 17,
+                color: AppColor.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        6.height,
+        LinearProgressIndicator(
+          value: percent,
+          borderRadius: BorderRadius.circular(20),
+          minHeight: 10,
+          backgroundColor: AppColor.backgroundColor,
+          color: AppColor.mainColor,
+        ),
+      ],
+    );
+  }
+
+  Widget _findMe({bool center = false}) {
+    return Column(
+      crossAxisAlignment: center
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
+      children: [
+        Text('FIND WITH ME', style: GoogleFonts.rubik()),
+        12.height,
+        Wrap(
+          runSpacing: 8,
+          spacing: 16,
+          children: MySocial.values.map(_socialBtn).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _bestSkill({bool center = false}) {
+    return Column(
+      crossAxisAlignment: center
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.start,
+      children: [
+        Text('BEST SKILL ON', style: GoogleFonts.rubik()),
+        12.height,
+        Wrap(
+          runSpacing: 8,
+          spacing: 16,
+          children: [
+            MySkill.flutter,
+            MySkill.dart,
+            MySkill.firebase,
+          ].map(_skillItem).toList(),
+        ),
+      ],
+    );
+  }
+
+  Widget _skillItem(MySkill s) {
+    return Container(
+      width: 40,
+      height: 40,
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: Border.all(width: 1, color: AppColor.whiteOrBlack),
+        borderRadius: BorderRadius.circular(10),
+        color: AppColor.backgroundColor,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 10,
+            color: AppColor.whiteOrBlack.withValues(alpha: 0.5),
+            offset: Offset(0, 1),
+          ),
+        ],
+      ),
+      child: s.icon.image(),
     );
   }
 
@@ -124,14 +235,14 @@ class _HomePageState extends State<HomePage> {
           //
         }
       },
-      borderRadius: BorderRadius.circular(50),
+      borderRadius: BorderRadius.circular(10),
       child: Container(
         width: 40,
         height: 40,
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
           border: Border.all(width: 1, color: AppColor.whiteOrBlack),
-          borderRadius: BorderRadius.circular(50),
+          borderRadius: BorderRadius.circular(10),
           color: AppColor.backgroundColor,
           boxShadow: [
             BoxShadow(
@@ -187,6 +298,15 @@ class _HomePageState extends State<HomePage> {
             _descriptionW(), 36.height,
             // button
             _letsTalkBtn(),
+            48.height,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(child: _findMe()),
+                24.width,
+                Expanded(child: _bestSkill()),
+              ],
+            ),
           ],
         ],
       ),
@@ -269,9 +389,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
-  }
-
-  _talk(){
-    
   }
 }

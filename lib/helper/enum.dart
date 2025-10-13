@@ -21,3 +21,19 @@ enum MySocial {
     };
   }
 }
+
+enum MySkill {
+  flutter,
+  dart,
+  firebase,
+  python;
+
+  AssetGenImage get icon {
+    return switch (this) {
+      flutter => AppAssets.icons.icFlutter,
+      dart => AppAssets.icons.icDart,
+      firebase => AppAssets.icons.icFirebase,
+      python => AppAssets.icons.icPython,
+    };
+  }
+}

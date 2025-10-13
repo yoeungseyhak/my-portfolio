@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/extension/app_color.dart';
 import 'package:portfolio/ui/pages/home/home_page.dart';
@@ -64,7 +63,7 @@ class _MainPageState extends State<MainPage>
 
       // stretch: true,
       floating: true,
-      pinned: false,
+      pinned: true,
       forceMaterialTransparency: true,
       flexibleSpace: ClipRect(
         child: BackdropFilter(
@@ -157,9 +156,12 @@ class _MainPageState extends State<MainPage>
     return Tab(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24),
-        child: Text(
-          text,
-          style: GoogleFonts.rubik(fontSize: 15, color: AppColor.white),
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            text,
+            style: GoogleFonts.rubik(fontSize: 15, color: AppColor.white),
+          ),
         ),
       ),
     );
