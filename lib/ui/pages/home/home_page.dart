@@ -5,6 +5,7 @@ import 'package:portfolio/extension/app_color.dart';
 import 'package:portfolio/extension/size_extension.dart';
 import 'package:portfolio/generated/assets.gen.dart';
 import 'package:portfolio/helper/enum.dart';
+import 'package:portfolio/ui/components/clipper/hexagon_clipper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,136 +34,73 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        (MediaQuery.of(context).size.width * .1).height,
-                        Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Hello, ',
-                                style: GoogleFonts.rubik(
-                                  fontSize: 25,
-                                  color: AppColor.white,
-                                ),
-                              ),
-                              TextSpan(
-                                text: 'I\'m',
-                                style: GoogleFonts.rubik(
-                                  fontSize: 25,
-                                  color: AppColor.mainColor,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Text(
-                          'YOEUNG SEYHAK',
-                          style: GoogleFonts.oswald(
-                            fontSize: 40,
-                            color: AppColor.mainColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          'Flutter developer',
-                          style: GoogleFonts.rubik(
-                            fontSize: 25,
-                            color: AppColor.white,
-                          ),
-                        ),
-                        24.height,
-                        Text(
-                          'A passionate mobile app developer who loves turning ideas into clean, functional, and user-friendly applications. I specialize in building Flutter apps with smooth UI and responsive design, and I’m constantly learning new technologies to improve my craft.',
-                          style: GoogleFonts.robotoCondensed(
-                            color: AppColor.white,
-                            wordSpacing: 1.5,
-                          ),
-                        ),
-                        48.height,
-                        // button
-                        Row(
-                          children: [
-                            InkWell(
-                              borderRadius: BorderRadius.circular(10),
-                              onTap: () {},
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 8,
-                                  horizontal: 16,
-                                ),
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      blurRadius: 10,
-                                      color: AppColor.mainColor,
-                                      offset: Offset(0, 5),
-                                    ),
-                                  ],
-                                  color: AppColor.mainColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Let\'s Talk',
-                                      style: GoogleFonts.rubik(
-                                        color: AppColor.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  _greetW(),
 
                   // profile
-                  Expanded(
-                    child: Container(
-                      alignment: Alignment.topRight,
-                      child: Stack(
-                        alignment: AlignmentGeometry.bottomCenter,
-                        children: [
-                          PhysicalShape(
-                            clipper: HexagonClipperBG(),
-                            clipBehavior: Clip.antiAlias,
-                            color: AppColor.mainColor,
-                            elevation: 25,
-                            shadowColor: AppColor.mainColor,
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width / 3,
-                              height: MediaQuery.of(context).size.width / 3,
-                            ),
-                          ),
+                  _profile(),
+                ],
+              ),
+              if (MediaQuery.of(context).size.width <= 600) ...[
+                24.height,
+                _descriptionW(), 24.height,
+                // button
+                _letsTalkBtn(),
+              ],
 
-                          ClipPath(
-                            clipper: HexagonClipperFG(),
-                            child: AppAssets.images.me.image(
-                              width: MediaQuery.of(context).size.width / 3,
-                              fit: BoxFit.fitHeight,
-                            ),
+              48.height,
+
+              //social
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: AlignmentGeometry.centerLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('FIND WITH ME', style: GoogleFonts.rubik()),
+                          12.height,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: MySocial.values.map((e) {
+                              if (e.index != 0) {
+                                return _socialBtn(e).paddingOnly(left: 16);
+                              }
+                              return _socialBtn(e);
+                            }).toList(),
                           ),
                         ],
                       ),
                     ),
                   ),
-                ],
-              ),
-              48.height,
-
-              //social
-              Row(
-                children: [
-                  Text('Check out my', style: GoogleFonts.rubik()),
-                  16.width,
-                  ...MySocial.values.map(_socialBtn),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2.5,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      alignment: AlignmentGeometry.centerLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('BEST SKILL ON', style: GoogleFonts.rubik()),
+                          12.height,
+                          Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: MySocial.values.map((e) {
+                              if (e.index != 0) {
+                                return _socialBtn(e).paddingOnly(left: 16);
+                              }
+                              return _socialBtn(e);
+                            }).toList(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -205,55 +143,135 @@ class _HomePageState extends State<HomePage> {
         ),
         child: s.icon.image(color: AppColor.whiteOrBlack),
       ),
-    ).paddingSymmetric(horizontal: 8);
-  }
-}
-
-class HexagonClipperBG extends CustomClipper<Path> {
-  final double radius;
-  HexagonClipperBG({this.radius = 0});
-
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-
-    path
-      ..moveTo(size.width / 2, 0) // moving to topCenter 1st, then draw the path
-      ..lineTo(size.width, size.height * .25)
-      ..lineTo(size.width, size.height * .75)
-      ..lineTo(size.width * .5, size.height)
-      ..lineTo(0, size.height * .75)
-      ..lineTo(0, size.height * .25)
-      ..close();
-
-    return path;
+    );
   }
 
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return false;
+  Widget _greetW() {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          (MediaQuery.of(context).size.width * .1).height,
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: 'Hello, ',
+                  style: GoogleFonts.rubik(fontSize: 25, color: AppColor.white),
+                ),
+                TextSpan(
+                  text: 'I\'m',
+                  style: GoogleFonts.rubik(
+                    fontSize: 25,
+                    color: AppColor.mainColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Text(
+            'YOEUNG SEYHAK',
+            style: GoogleFonts.oswald(
+              fontSize: 40,
+              color: AppColor.mainColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            'Flutter developer',
+            style: GoogleFonts.rubik(fontSize: 25, color: AppColor.white),
+          ),
+
+          if (MediaQuery.of(context).size.width > 600) ...[
+            24.height,
+            _descriptionW(), 36.height,
+            // button
+            _letsTalkBtn(),
+          ],
+        ],
+      ),
+    );
   }
-}
 
-class HexagonClipperFG extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-
-    path
-      // ..moveTo(size.width / 2, 0) // moving to topCenter 1st, then draw the path
-      ..lineTo(size.width, 0)
-      ..lineTo(size.width, size.height - (size.width * .25))
-      ..lineTo(size.width * .5, size.height)
-      ..lineTo(0, size.height - (size.width * .25))
-      ..lineTo(0, size.height * .25)
-      ..close();
-
-    return path;
+  Widget _descriptionW() {
+    return Text(
+      'A passionate mobile app developer who loves turning ideas into clean, functional, and user-friendly applications. I specialize in building Flutter apps with smooth UI and responsive design, and I’m constantly learning new technologies to improve my craft.',
+      style: GoogleFonts.robotoCondensed(
+        color: AppColor.white,
+        wordSpacing: 1.5,
+      ),
+    );
   }
 
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return false;
+  Widget _profile() {
+    return Expanded(
+      child: Container(
+        alignment: Alignment.topRight,
+        child: Stack(
+          alignment: AlignmentGeometry.bottomCenter,
+          children: [
+            PhysicalShape(
+              clipper: HexagonClipperBG(),
+              clipBehavior: Clip.antiAlias,
+              color: AppColor.mainColor,
+              elevation: 25,
+              shadowColor: AppColor.mainColor,
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width / 3,
+                height: MediaQuery.of(context).size.width / 3,
+              ),
+            ),
+
+            ClipPath(
+              clipper: HexagonClipperFG(),
+              child: AppAssets.images.me.image(
+                width: MediaQuery.of(context).size.width / 3,
+                fit: BoxFit.fitHeight,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _letsTalkBtn() {
+    return Row(
+      children: [
+        InkWell(
+          borderRadius: BorderRadius.circular(10),
+          onTap: () {},
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 10,
+                  color: AppColor.mainColor,
+                  // offset: Offset(0, 5),
+                ),
+              ],
+              color: AppColor.mainColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              children: [
+                Text(
+                  'Let\'s Talk',
+                  style: GoogleFonts.rubik(
+                    color: AppColor.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  _talk(){
+    
   }
 }
