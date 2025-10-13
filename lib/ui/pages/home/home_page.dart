@@ -22,7 +22,10 @@ class _HomePageState extends State<HomePage> {
       children: [
         Container(
           // color: Colors.black,
-          padding: EdgeInsets.symmetric(horizontal: 96, vertical: 48),
+          padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * .08,
+            vertical: MediaQuery.of(context).size.width * .04,
+          ),
           child: Column(
             children: [
               Row(
@@ -34,7 +37,7 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        144.height,
+                        (MediaQuery.of(context).size.width * .1).height,
                         Text.rich(
                           TextSpan(
                             children: [
@@ -152,6 +155,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
+              48.height,
+
               //social
               Row(
                 children: [
@@ -189,7 +194,7 @@ class _HomePageState extends State<HomePage> {
         decoration: BoxDecoration(
           border: Border.all(width: 1, color: AppColor.whiteOrBlack),
           borderRadius: BorderRadius.circular(50),
-          color: AppColor.blackOrWhite,
+          color: AppColor.backgroundColor,
           boxShadow: [
             BoxShadow(
               blurRadius: 10,
