@@ -9,8 +9,9 @@ class ResumePage extends StatefulWidget {
 }
 
 class _ResumePageState extends State<ResumePage> {
+  final _scrollCtrl = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Resume'));
+    return ListView(controller: _scrollCtrl, children: []);
   }
 }

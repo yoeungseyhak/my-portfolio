@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/extension/app_color.dart';
+import 'package:portfolio/generated/assets.gen.dart';
 import 'package:portfolio/ui/pages/home/home_page.dart';
 import 'package:portfolio/ui/pages/project/projects_page.dart';
 import 'package:portfolio/ui/pages/resume/resume_page.dart';
@@ -17,6 +19,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabCtrl;
+  final RxBool _isLightMode = false.obs;
 
   @override
   void initState() {
@@ -81,11 +84,12 @@ class _MainPageState extends State<MainPage>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Flexible(
+                    Expanded(
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
+                        alignment: AlignmentGeometry.centerLeft,
                         child: Text(
-                          'Portfolio',
+                          'SEYHAK',
                           style: GoogleFonts.rubik(
                             fontSize: 25,
                             color: AppColor.mainColor,
@@ -96,10 +100,55 @@ class _MainPageState extends State<MainPage>
                     ),
 
                     //tabbar
-                    _tabBar(),
+                    Expanded(
+                      child: FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: AlignmentGeometry.center,
+                        child: _tabBar(),
+                      ),
+                    ),
 
-                    //contact btn
-                    if (MediaQuery.of(context).size.width > 600) _contactBtn(),
+                    //contact
+                    if (MediaQuery.of(context).size.width > 600)
+                      Expanded(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          alignment: AlignmentGeometry.centerRight,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(10),
+                            onTap: () {},
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 8,
+                                horizontal: 16,
+                              ),
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurRadius: 7,
+                                    color: AppColor.mainColor,
+                                    // offset: Offset(0, 5),
+                                  ),
+                                ],
+                                color: AppColor.mainColor,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'CONTACT ME',
+                                    style: GoogleFonts.rubik(
+                                      fontSize: 13,
+                                      color: AppColor.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -110,44 +159,48 @@ class _MainPageState extends State<MainPage>
     );
   }
 
-  Widget _contactBtn() {
-    return InkWell(
-      borderRadius: BorderRadius.circular(10),
-      onTap: () {},
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-        decoration: BoxDecoration(
-          boxShadow: [BoxShadow(blurRadius: 6, color: AppColor.mainColor)],
-          color: AppColor.mainColor,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          'Contact',
-          style: GoogleFonts.rubik(
-            color: AppColor.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+  Widget themeBtn() {
+    return Obx(
+      () => Switch(
+        value: _isLightMode.value,
+        onChanged: (value) {
+          _isLightMode(value);
+        },
+        activeThumbColor: AppColor.mainColor,
+        inactiveThumbColor: Colors.grey.shade900,
+        activeTrackColor: AppColor.mainColor,
+        inactiveTrackColor: Colors.grey.shade900,
+        trackOutlineColor: WidgetStatePropertyAll(AppColor.mainColor),
+        activeThumbImage: AppAssets.icons.icLightMode.provider(),
+        inactiveThumbImage: AppAssets.icons.icNightMode.provider(),
       ),
     );
   }
 
   Widget _tabBar() {
     return IntrinsicWidth(
-      child: TabBar(
-        controller: _tabCtrl,
-        indicator: BoxDecoration(
-          color: AppColor.mainColor,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade900,
           borderRadius: BorderRadius.circular(50),
         ),
-        unselectedLabelStyle: GoogleFonts.rubik(
-          fontSize: 15,
-          color: AppColor.white,
-        ),
+        padding: EdgeInsets.all(8),
+        child: TabBar(
+          controller: _tabCtrl,
+          indicator: BoxDecoration(
+            color: AppColor.mainColor,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          unselectedLabelStyle: GoogleFonts.rubik(
+            fontSize: 15,
+            color: AppColor.white,
+          ),
 
-        labelStyle: GoogleFonts.rubik(fontSize: 15, color: AppColor.white),
-        labelPadding: EdgeInsets.zero,
-        tabs: [_tabItem('Home'), _tabItem('Projects'), _tabItem('Resume')],
+          labelStyle: GoogleFonts.rubik(fontSize: 15, color: AppColor.white),
+          labelPadding: EdgeInsets.zero,
+
+          tabs: [_tabItem('HOME'), _tabItem('PROJECTS'), _tabItem('RESUME')],
+        ),
       ),
     );
   }
@@ -158,9 +211,18 @@ class _MainPageState extends State<MainPage>
         padding: EdgeInsets.symmetric(horizontal: 24),
         child: FittedBox(
           fit: BoxFit.scaleDown,
-          child: Text(
-            text,
-            style: GoogleFonts.rubik(fontSize: 15, color: AppColor.white),
+          child: SizedBox(
+            width: 80,
+            child: Center(
+              child: Text(
+                text,
+                style: GoogleFonts.robotoCondensed(
+                  fontSize: 15,
+                  color: AppColor.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
           ),
         ),
       ),

@@ -17,6 +17,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_dart.png
   AssetGenImage get icDart => const AssetGenImage('assets/icons/ic_dart.png');
 
+  /// File path: assets/icons/ic_figma.png
+  AssetGenImage get icFigma => const AssetGenImage('assets/icons/ic_figma.png');
+
   /// File path: assets/icons/ic_firebase.png
   AssetGenImage get icFirebase =>
       const AssetGenImage('assets/icons/ic_firebase.png');
@@ -32,13 +35,28 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_java.png
   AssetGenImage get icJava => const AssetGenImage('assets/icons/ic_java.png');
 
+  /// File path: assets/icons/ic_kotlin.png
+  AssetGenImage get icKotlin =>
+      const AssetGenImage('assets/icons/ic_kotlin.png');
+
+  /// File path: assets/icons/ic_light_mode.png
+  AssetGenImage get icLightMode =>
+      const AssetGenImage('assets/icons/ic_light_mode.png');
+
   /// File path: assets/icons/ic_linkedin.png
   AssetGenImage get icLinkedin =>
       const AssetGenImage('assets/icons/ic_linkedin.png');
 
+  /// File path: assets/icons/ic_night_mode.png
+  AssetGenImage get icNightMode =>
+      const AssetGenImage('assets/icons/ic_night_mode.png');
+
   /// File path: assets/icons/ic_python.png
   AssetGenImage get icPython =>
       const AssetGenImage('assets/icons/ic_python.png');
+
+  /// File path: assets/icons/ic_swift.png
+  AssetGenImage get icSwift => const AssetGenImage('assets/icons/ic_swift.png');
 
   /// File path: assets/icons/ic_telegram.png
   AssetGenImage get icTelegram =>
@@ -47,12 +65,17 @@ class $AssetsIconsGen {
   /// List of all assets
   List<AssetGenImage> get values => [
     icDart,
+    icFigma,
     icFirebase,
     icFlutter,
     icGithub,
     icJava,
+    icKotlin,
+    icLightMode,
     icLinkedin,
+    icNightMode,
     icPython,
+    icSwift,
     icTelegram,
   ];
 }
@@ -60,11 +83,20 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/books.png
+  AssetGenImage get books => const AssetGenImage('assets/images/books.png');
+
   /// File path: assets/images/me.png
   AssetGenImage get me => const AssetGenImage('assets/images/me.png');
 
+  /// File path: assets/images/profile.png
+  AssetGenImage get profile => const AssetGenImage('assets/images/profile.png');
+
+  /// File path: assets/images/unnamed.png
+  AssetGenImage get unnamed => const AssetGenImage('assets/images/unnamed.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [me];
+  List<AssetGenImage> get values => [books, me, profile, unnamed];
 }
 
 class AppAssets {

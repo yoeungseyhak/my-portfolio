@@ -23,10 +23,17 @@ enum MySocial {
 }
 
 enum MySkill {
-  flutter,
-  dart,
-  firebase,
-  python;
+  flutter('Flutter'),
+  dart('Dart'),
+  firebase('Firebase'),
+  python('Python'),
+  java('Java'),
+  figma('Figma'),
+  kotlin('Kotlin'),
+  swift('Swift');
+
+  const MySkill(this.name);
+  final String name;
 
   AssetGenImage get icon {
     return switch (this) {
@@ -34,6 +41,10 @@ enum MySkill {
       dart => AppAssets.icons.icDart,
       firebase => AppAssets.icons.icFirebase,
       python => AppAssets.icons.icPython,
+      java => AppAssets.icons.icJava,
+      figma => AppAssets.icons.icFigma,
+      kotlin => AppAssets.icons.icKotlin,
+      swift => AppAssets.icons.icSwift,
     };
   }
 }

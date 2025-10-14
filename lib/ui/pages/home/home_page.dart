@@ -16,15 +16,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _scrollCtrl = ScrollController();
   @override
   Widget build(BuildContext context) {
     return ListView(
+      controller: _scrollCtrl,
       children: [
         Container(
           // color: Colors.black,
           padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * .08,
-            vertical: MediaQuery.of(context).size.width * .04,
+            vertical: MediaQuery.of(context).size.width * .03,
           ),
           child: Column(
             children: [
@@ -113,53 +115,53 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              36.height,
-              _skillW('Flutter', 0.8),
-              24.height,
-              _skillW('Dart', 0.8),
+              80.height,
+              Wrap(
+                runSpacing: 100,
+                spacing: 120,
+                children: [
+                  MySkill.flutter,
+                  MySkill.dart,
+                  MySkill.firebase,
+                  MySkill.python,
+                  MySkill.java,
+                  MySkill.figma,
+                ].map(_skillW).toList(),
+              ),
+              100.height,
+
+              //learning
+              Text(
+                'LEARNING',
+                style: GoogleFonts.rubik(
+                  fontSize: MediaQuery.of(context).size.width > 600 ? 40 : 25,
+                  color: AppColor.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              80.height,
+              Wrap(
+                runSpacing: 100,
+                spacing: 120,
+                children: [MySkill.kotlin, MySkill.swift].map(_skillW).toList(),
+              ),
+              100.height,
             ],
           ),
         ),
-
-        //
-        Container(color: Colors.grey.shade900, child: 1000.height),
       ],
     );
   }
 
-  Widget _skillW(String text, double percent) {
+  Widget _skillW(MySkill s) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              text,
-              style: GoogleFonts.rubik(
-                fontSize: 17,
-                color: AppColor.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-
-            Text(
-              '${(percent * 100).toStringAsFixed(0)}%',
-              style: GoogleFonts.rubik(
-                fontSize: 17,
-                color: AppColor.white,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        6.height,
-        LinearProgressIndicator(
-          value: percent,
-          borderRadius: BorderRadius.circular(20),
-          minHeight: 10,
-          backgroundColor: AppColor.backgroundColor,
-          color: AppColor.mainColor,
+        s.icon.image(width: 50, height: 50),
+        16.height,
+        Text(
+          s.name,
+          style: GoogleFonts.rubik(fontSize: 14, color: AppColor.white),
         ),
       ],
     );
@@ -236,7 +238,7 @@ class _HomePageState extends State<HomePage> {
         }
       },
       borderRadius: BorderRadius.circular(10),
-      child: Container(
+      child: Ink(
         width: 40,
         height: 40,
         padding: EdgeInsets.all(10),
@@ -334,7 +336,7 @@ class _HomePageState extends State<HomePage> {
               clipper: HexagonClipperBG(),
               clipBehavior: Clip.antiAlias,
               color: AppColor.mainColor,
-              elevation: 25,
+              elevation: 100,
               shadowColor: AppColor.mainColor,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width / 3,
@@ -361,7 +363,7 @@ class _HomePageState extends State<HomePage> {
         InkWell(
           borderRadius: BorderRadius.circular(10),
           onTap: () {},
-          child: Container(
+          child: Ink(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             decoration: BoxDecoration(
               boxShadow: [
