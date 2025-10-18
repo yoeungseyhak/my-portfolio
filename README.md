@@ -1,6 +1,6 @@
-# portfolio
+# I am YOEUNG SEYHAK
 
-A new Flutter project.
+A passionate mobile app developer who loves turning ideas into clean, functional, and user-friendly applications. I specialize in building Flutter apps with smooth UI and responsive design, and I’m constantly learning new technologies to improve my craft.
 
 ## Getting Started
 
