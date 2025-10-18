@@ -82,9 +82,12 @@ class _MainPageState extends State<MainPage>
 
                     //tabbar
                     Expanded(
+                      flex: 2,
                       child: FittedBox(
                         fit: BoxFit.scaleDown,
-                        alignment: AlignmentGeometry.center,
+                        alignment: MediaQuery.of(context).size.width > 600
+                            ? AlignmentGeometry.center
+                            : AlignmentGeometry.centerRight,
                         child: _tabBar(),
                       ),
                     ),

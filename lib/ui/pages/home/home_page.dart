@@ -247,34 +247,47 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           (MediaQuery.of(context).size.width * .1).height,
-          Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text: 'Hello, ',
-                  style: GoogleFonts.rubik(fontSize: 25, color: AppColor.white),
-                ),
-                TextSpan(
-                  text: 'I\'m',
-                  style: GoogleFonts.rubik(
-                    fontSize: 25,
-                    color: AppColor.mainColor,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'Hello, ',
+                    style: GoogleFonts.rubik(
+                      fontSize: 25,
+                      color: AppColor.white,
+                    ),
                   ),
-                ),
-              ],
+                  TextSpan(
+                    text: 'I\'m',
+                    style: GoogleFonts.rubik(
+                      fontSize: 25,
+                      color: AppColor.mainColor,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
+
+          // 3.height,
           Text(
             'YOEUNG SEYHAK',
             style: GoogleFonts.oswald(
               fontSize: 40,
               color: AppColor.mainColor,
               fontWeight: FontWeight.bold,
+              height: 1.1,
             ),
           ),
-          Text(
-            'Flutter developer',
-            style: GoogleFonts.rubik(fontSize: 25, color: AppColor.white),
+          8.height,
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Text(
+              'Flutter developer',
+              style: GoogleFonts.rubik(fontSize: 25, color: AppColor.white),
+            ),
           ),
 
           if (MediaQuery.of(context).size.width > 600) ...[

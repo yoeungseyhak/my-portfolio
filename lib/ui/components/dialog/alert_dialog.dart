@@ -70,7 +70,7 @@ class PAlertDialog {
             ),
           ],
         ),
-        12.height,
+        24.height,
         Center(child: ContactMe()),
       ],
     );
