@@ -3,13 +3,15 @@ import 'package:portfolio/generated/assets.gen.dart';
 enum MySocial {
   telegram,
   gitHub,
-  linkedIn;
+  linkedIn,
+  email;
 
   AssetGenImage get icon {
     return switch (this) {
       telegram => AppAssets.icons.icTelegram,
       gitHub => AppAssets.icons.icGithub,
       linkedIn => AppAssets.icons.icLinkedin,
+      email => AppAssets.icons.icEmail,
     };
   }
 
@@ -18,6 +20,8 @@ enum MySocial {
       telegram => 'https://t.me/yoeungseyhak',
       gitHub => 'https://github.com/yoeungseyhak',
       linkedIn => 'https://www.linkedin.com/in/yoeung-seyhak',
+      email =>
+        'https://mail.google.com/mail/?view=cm&fs=1&to=seyhakyoeung@gmail.com',
     };
   }
 }

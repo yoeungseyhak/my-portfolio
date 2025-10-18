@@ -3,13 +3,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/extension/app_color.dart';
 import 'package:portfolio/generated/assets.gen.dart';
+import 'package:portfolio/ui/components/dialog/alert_dialog.dart';
 import 'package:portfolio/ui/pages/home/home_page.dart';
 import 'package:portfolio/ui/pages/project/projects_page.dart';
 import 'package:portfolio/ui/pages/resume/resume_page.dart';
 import 'dart:ui' as ui;
 
 class MainPage extends StatefulWidget {
-  static const route = '/MainPage';
+  static const route = '/';
   const MainPage({super.key});
 
   @override
@@ -34,40 +35,20 @@ class _MainPageState extends State<MainPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: _appbar(),
-      body: NestedScrollView(
-        headerSliverBuilder: (context, innerBoxIsScrolled) {
-          return [
-            _appbar(),
-            // if (MediaQuery.of(context).size.width <= 600)
-            //   SliverAppBar(
-            //     actions: [
-            //       _contactBtn().paddingOnly(
-            //         right: MediaQuery.of(context).size.width * .05,
-            //         top: 16,
-            //       ),
-            //     ],
-            //   ),
-          ];
-        },
-        body: TabBarView(
-          controller: _tabCtrl,
-          physics: NeverScrollableScrollPhysics(),
-          children: _tabView(),
-        ),
+      extendBodyBehindAppBar: true,
+      appBar: _appbar(),
+      body: TabBarView(
+        controller: _tabCtrl,
+        physics: NeverScrollableScrollPhysics(),
+        children: _tabView(),
       ),
     );
   }
 
-  SliverAppBar _appbar() {
-    return SliverAppBar(
-      // title: FittedBox(fit: BoxFit.scaleDown, child: Text('Portfolio')),
-      snap: true,
-
-      // stretch: true,
-      floating: true,
-      pinned: true,
+  AppBar _appbar() {
+    return AppBar(
       forceMaterialTransparency: true,
+
       flexibleSpace: ClipRect(
         child: BackdropFilter(
           filter: ui.ImageFilter.blur(sigmaX: 7, sigmaY: 7),
@@ -116,7 +97,9 @@ class _MainPageState extends State<MainPage>
                           alignment: AlignmentGeometry.centerRight,
                           child: InkWell(
                             borderRadius: BorderRadius.circular(10),
-                            onTap: () {},
+                            onTap: () {
+                              PAlertDialog.showDialog(context);
+                            },
                             child: Container(
                               padding: EdgeInsets.symmetric(
                                 vertical: 8,

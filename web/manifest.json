@@ -1,11 +1,11 @@
 {
-    "name": "portfolio",
-    "short_name": "portfolio",
+    "name": "Yoeung Seyhak Portfolio",
+    "short_name": "Seyhak",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Yoeung Seyhak Portfolio",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

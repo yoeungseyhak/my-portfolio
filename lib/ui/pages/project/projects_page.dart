@@ -24,9 +24,12 @@ class _ProjectsPageState extends State<ProjectsPage> {
         vertical: MediaQuery.of(context).size.width * .03,
       ),
       children: [
+        SafeArea(child: Container()),
+
         Center(
           child: Text(
             'COLLABORATIVE PROJECTS',
+            textAlign: TextAlign.center,
             style: GoogleFonts.rubik(
               fontSize: MediaQuery.of(context).size.width > 600 ? 40 : 25,
               color: AppColor.white,
@@ -34,7 +37,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
             ),
           ),
         ),
-        48.height,
+        24.height,
         _projectW(),
         100.height,
       ],
@@ -56,49 +59,8 @@ class _ProjectsPageState extends State<ProjectsPage> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AppAssets.images.unnamed.provider(),
-                              fit: BoxFit.cover,
-                            ),
-                            borderRadius: BorderRadius.circular(
-                              MediaQuery.of(context).size.width * 0.01,
-                            ),
-                          ),
-                          clipBehavior: Clip.antiAlias,
-                          width: MediaQuery.of(context).size.width * .06,
-                          height: MediaQuery.of(context).size.width * .06,
-                        ),
-                        (MediaQuery.of(context).size.width * 0.02).width,
-                        Text(
-                          'Gonoka App',
-                          style: GoogleFonts.robotoCondensed(
-                            color: AppColor.white,
-                            fontSize: MediaQuery.of(context).size.width * 0.02,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                      ],
-                    ),
-                    (MediaQuery.of(context).size.width * 0.02).height,
-                    //
-                    Text(
-                      'More than just an eBook platform — it’s a place where stories meet community. With Gonoka, you don’t just read; you connect, share, and grow. It combines the joy of discovering books with the power of social interaction, encouraging you to become the best version of yourself through the habit of reading.',
-                      style: GoogleFonts.robotoCondensed(
-                        color: Colors.grey.shade300,
-                        fontSize: MediaQuery.of(context).size.width * 0.012,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              if (MediaQuery.of(context).size.width > 600)
+                Expanded(child: _gnkW()),
               Expanded(
                 child: FittedBox(
                   fit: BoxFit.scaleDown,
@@ -128,8 +90,54 @@ class _ProjectsPageState extends State<ProjectsPage> {
               ),
             ],
           ),
+
+          if (MediaQuery.of(context).size.width <= 600) _gnkW(),
         ],
       ),
+    );
+  }
+
+  Widget _gnkW() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AppAssets.images.unnamed.provider(),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(
+                  MediaQuery.of(context).size.width * 0.01,
+                ),
+              ),
+              clipBehavior: Clip.antiAlias,
+              width: MediaQuery.of(context).size.width * .06,
+              height: MediaQuery.of(context).size.width * .06,
+            ),
+            (MediaQuery.of(context).size.width * 0.02).width,
+            Text(
+              'Gonoka App',
+              style: GoogleFonts.robotoCondensed(
+                color: AppColor.white,
+                fontSize: MediaQuery.of(context).size.width * 0.02,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.2,
+              ),
+            ),
+          ],
+        ),
+        (MediaQuery.of(context).size.width * 0.02).height,
+        //
+        Text(
+          'More than just an eBook platform — it’s a place where stories meet community. With Gonoka, you don’t just read; you connect, share, and grow. It combines the joy of discovering books with the power of social interaction, encouraging you to become the best version of yourself through the habit of reading.',
+          style: GoogleFonts.robotoCondensed(
+            color: Colors.grey.shade300,
+            fontSize: 14,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -37,6 +37,7 @@ dependencies:
   get: ^4.7.2
   google_fonts: ^6.3.2
   url_launcher: ^6.3.2
+  file_saver: ^0.3.1
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +75,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/pdf/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

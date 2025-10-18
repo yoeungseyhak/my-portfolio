@@ -17,6 +17,13 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_dart.png
   AssetGenImage get icDart => const AssetGenImage('assets/icons/ic_dart.png');
 
+  /// File path: assets/icons/ic_download.png
+  AssetGenImage get icDownload =>
+      const AssetGenImage('assets/icons/ic_download.png');
+
+  /// File path: assets/icons/ic_email.png
+  AssetGenImage get icEmail => const AssetGenImage('assets/icons/ic_email.png');
+
   /// File path: assets/icons/ic_figma.png
   AssetGenImage get icFigma => const AssetGenImage('assets/icons/ic_figma.png');
 
@@ -65,6 +72,8 @@ class $AssetsIconsGen {
   /// List of all assets
   List<AssetGenImage> get values => [
     icDart,
+    icDownload,
+    icEmail,
     icFigma,
     icFirebase,
     icFlutter,
@@ -99,11 +108,22 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [books, me, profile, unnamed];
 }
 
+class $AssetsPdfGen {
+  const $AssetsPdfGen();
+
+  /// File path: assets/pdf/cv.pdf
+  String get cv => 'assets/pdf/cv.pdf';
+
+  /// List of all assets
+  List<String> get values => [cv];
+}
+
 class AppAssets {
   const AppAssets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsPdfGen pdf = $AssetsPdfGen();
 }
 
 class AssetGenImage {

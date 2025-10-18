@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/utils.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:portfolio/extension/app_color.dart';
 import 'package:portfolio/extension/size_extension.dart';
 import 'package:portfolio/generated/assets.gen.dart';
 import 'package:portfolio/helper/enum.dart';
+import 'package:portfolio/ui/components/bottom/p_bottom_widget.dart';
 import 'package:portfolio/ui/components/clipper/hexagon_clipper.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:portfolio/ui/components/contact/contact_me.dart';
+import 'package:portfolio/ui/components/dialog/alert_dialog.dart';
 
 class HomePage extends StatefulWidget {
   static const route = '/HomePage';
@@ -22,6 +26,7 @@ class _HomePageState extends State<HomePage> {
     return ListView(
       controller: _scrollCtrl,
       children: [
+        SafeArea(child: Container()),
         Container(
           // color: Colors.black,
           padding: EdgeInsets.symmetric(
@@ -101,10 +106,10 @@ class _HomePageState extends State<HomePage> {
         //skill
         Container(
           padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * .08,
+            horizontal: 60,
             vertical: MediaQuery.of(context).size.width * .04,
           ),
-          color: Colors.grey.shade900,
+          // color: Colors.grey.shade900,
           child: Column(
             children: [
               Text(
@@ -115,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              80.height,
+              48.height,
               Wrap(
                 runSpacing: 100,
                 spacing: 120,
@@ -139,16 +144,17 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              80.height,
+              48.height,
               Wrap(
                 runSpacing: 100,
                 spacing: 120,
                 children: [MySkill.kotlin, MySkill.swift].map(_skillW).toList(),
               ),
-              100.height,
+              48.height,
             ],
           ),
         ),
+        PBottomWidget(),
       ],
     );
   }
@@ -167,19 +173,28 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _findMe({bool center = false}) {
+  Widget _findMe({bool center = false, bool closeBtn = false}) {
     return Column(
       crossAxisAlignment: center
           ? CrossAxisAlignment.center
           : CrossAxisAlignment.start,
       children: [
-        Text('FIND WITH ME', style: GoogleFonts.rubik()),
+        if (closeBtn)
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('FIND WITH ME', style: GoogleFonts.rubik()),
+
+              IconButton(
+                onPressed: () => Get.back(),
+                icon: Icon(Icons.close_rounded),
+              ),
+            ],
+          )
+        else
+          Text('FIND WITH ME', style: GoogleFonts.rubik()),
         12.height,
-        Wrap(
-          runSpacing: 8,
-          spacing: 16,
-          children: MySocial.values.map(_socialBtn).toList(),
-        ),
+        ContactMe(),
       ],
     );
   }
@@ -223,39 +238,6 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       child: s.icon.image(),
-    );
-  }
-
-  Widget _socialBtn(MySocial s) {
-    return InkWell(
-      onTap: () async {
-        final Uri url = Uri.parse(s.url);
-        if (!await launchUrl(
-          url,
-          mode: LaunchMode.externalApplication, // opens in new tab (web)
-        )) {
-          //
-        }
-      },
-      borderRadius: BorderRadius.circular(10),
-      child: Ink(
-        width: 40,
-        height: 40,
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          border: Border.all(width: 1, color: AppColor.whiteOrBlack),
-          borderRadius: BorderRadius.circular(10),
-          color: AppColor.backgroundColor,
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 10,
-              color: AppColor.whiteOrBlack.withValues(alpha: 0.5),
-              offset: Offset(0, 1),
-            ),
-          ],
-        ),
-        child: s.icon.image(color: AppColor.whiteOrBlack),
-      ),
     );
   }
 
@@ -336,7 +318,7 @@ class _HomePageState extends State<HomePage> {
               clipper: HexagonClipperBG(),
               clipBehavior: Clip.antiAlias,
               color: AppColor.mainColor,
-              elevation: 100,
+              elevation: 30,
               shadowColor: AppColor.mainColor,
               child: SizedBox(
                 width: MediaQuery.of(context).size.width / 3,
@@ -362,7 +344,9 @@ class _HomePageState extends State<HomePage> {
       children: [
         InkWell(
           borderRadius: BorderRadius.circular(10),
-          onTap: () {},
+          onTap: () {
+            _letstalk();
+          },
           child: Ink(
             padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
             decoration: BoxDecoration(
@@ -391,5 +375,9 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
+  }
+
+  _letstalk() {
+    PAlertDialog.showDialog(context);
   }
 }
