@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                 _findMe(center: true),
                 36.height,
                 _bestSkill(center: true),
-                // _socialAndSkill(),
+                36.height,
               ],
             ],
           ),
@@ -102,6 +102,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+        24.height,
 
         //skill
         Container(

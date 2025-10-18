@@ -18,14 +18,23 @@ class PAlertDialog {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: AppColor.backgroundColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  width: MediaQuery.of(context).size.width / 1.5,
-                  // height: MediaQuery.of(context).size.width / 2,
-                  child: _findMe().paddingFromLTRB(48, 36, 48, 48),
+                Stack(
+                  alignment: AlignmentGeometry.topRight,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: AppColor.backgroundColor,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      width: MediaQuery.of(context).size.width / 1.25,
+                      // height: MediaQuery.of(context).size.width / 2,
+                      child: _findMe().paddingFromLTRB(36, 36, 36, 48),
+                    ),
+                    IconButton(
+                      onPressed: () => Get.back(),
+                      icon: Icon(Icons.close_rounded),
+                    ).paddingOnly(top: 8, right: 8),
+                  ],
                 ),
               ],
             ),
@@ -37,38 +46,15 @@ class PAlertDialog {
 
   static Widget _findMe() {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(child: Container()),
-            Expanded(
-              flex: 2,
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  'CONTACT ME',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.rubik(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-            ),
-
-            Expanded(
-              child: Align(
-                alignment: AlignmentGeometry.centerRight,
-                child: IconButton(
-                  onPressed: () => Get.back(),
-                  icon: Icon(Icons.close_rounded),
-                ),
-              ),
-            ),
-          ],
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            'CONTACT ME',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.rubik(fontWeight: FontWeight.bold, fontSize: 17),
+          ),
         ),
         24.height,
         Center(child: ContactMe()),

@@ -121,7 +121,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
               'Gonoka App',
               style: GoogleFonts.robotoCondensed(
                 color: AppColor.white,
-                fontSize: MediaQuery.of(context).size.width * 0.02,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 1.2,
               ),
